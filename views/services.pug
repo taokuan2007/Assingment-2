@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  section.box
+    h2 Services
+    p Here are some sample services.
+
+    form(action="/services", method="get")
+      .form-group
+        label(for="search") Search
+        input#search(type="text", name="search", placeholder="Search service")
+
+      .form-group
+        label(for="category") Category
+        select#category(name="category")
+          option(value="") All
+          option(value="design") Design
+          option(value="repair") Repair
+          option(value="marketing") Marketing
+
+      button.button(type="submit") Search
+
+  section.box
+    h3 Website Design
+    p Category: Design
+
+  section.box
+    h3 Phone Repair
+    p Category: Repair
+
+  section.box
+    h3 Social Media Help
+    p Category: Marketing

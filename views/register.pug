@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  section.box
+    h2 Register
+    p Fill out the form below to create an account.
+
+    form(action="#", method="post")
+      .form-group
+        label(for="name") Full Name
+        input#name(type="text", name="name", placeholder="Enter full name")
+
+      .form-group
+        label(for="email") Email
+        input#email(type="email", name="email", placeholder="Enter email")
+
+      .form-group
+        label(for="password") Password
+        input#password(type="password", name="password", placeholder="Enter password")
+
+      .form-group
+        label(for="confirmPassword") Confirm Password
+        input#confirmPassword(type="password", name="confirmPassword", placeholder="Confirm password")
+
+      button.button(type="submit") Register

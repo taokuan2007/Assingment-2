@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  section.box
+    h2 Add Service
+    p Use this form to add a service.
+
+    form(action="#", method="post")
+      .form-group
+        label(for="serviceName") Service Name
+        input#serviceName(type="text", name="serviceName", placeholder="Enter service name")
+
+      .form-group
+        label(for="category") Category
+        select#category(name="category")
+          option(value="") Select category
+          option(value="design") Design
+          option(value="repair") Repair
+          option(value="marketing") Marketing
+
+      .form-group
+        label(for="price") Price
+        input#price(type="number", name="price", placeholder="Enter price")
+
+      .form-group
+        label(for="description") Description
+        textarea#description(name="description", rows="4", placeholder="Enter description")
+
+      button.button(type="submit") Save Service
