@@ -1,9 +1,19 @@
+/* This makes padding stay inside the width of elements */
+* {
+  box-sizing: border-box;
+}
+
+/* Basic page style */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   background-color: #f4f4f4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Top area of the page */
 header {
   background-color: #2c3e50;
   color: white;
@@ -11,21 +21,81 @@ header {
   text-align: center;
 }
 
+/* Let the links move to the next line on small screens */
 nav {
   margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 nav a {
   color: white;
   text-decoration: none;
-  margin: 0 10px;
+  margin: 0 5px;
 }
 
+/* This is the box that holds the account button and menu */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Simple button for the account menu */
+.dropdown-button {
+  background-color: white;
+  color: #2c3e50;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Hide the menu until the user moves over it */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 180px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: left;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Show the menu when the mouse is on the dropdown */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Style the links inside the dropdown menu */
+.dropdown-menu a {
+  display: block;
+  color: #2c3e50;
+  padding: 12px 15px;
+  text-decoration: none;
+  margin: 0;
+}
+
+/* Small hover effect */
+.dropdown-menu a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Main content grows so the footer stays at the bottom */
 main {
   width: 80%;
+  max-width: 900px;
   margin: 20px auto;
+  flex: 1;
 }
 
+/* White content boxes */
 .box {
   background-color: white;
   border: 1px solid #ccc;
@@ -34,6 +104,7 @@ main {
   border-radius: 5px;
 }
 
+/* Space between form fields */
 .form-group {
   margin-bottom: 15px;
 }
@@ -44,6 +115,7 @@ label {
   font-weight: bold;
 }
 
+/* Form fields */
 input,
 select,
 textarea {
@@ -53,6 +125,7 @@ textarea {
   border-radius: 4px;
 }
 
+/* Simple button style */
 .button {
   background-color: #2c3e50;
   color: white;
@@ -62,8 +135,45 @@ textarea {
   cursor: pointer;
 }
 
+/* Footer stays under the content */
 footer {
   text-align: center;
   padding: 15px;
   background-color: #ddd;
+  margin-top: auto;
+}
+
+/* Smaller screen changes */
+@media (max-width: 768px) {
+  /* Give content more room on phones and tablets */
+  main {
+    width: 92%;
+  }
+
+  /* Stack nav links more nicely */
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Make the account area fit small screens better */
+  .dropdown {
+    width: 100%;
+    max-width: 220px;
+  }
+
+  .dropdown-button {
+    width: 100%;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    right: auto;
+    left: 0;
+  }
+
+  /* Make buttons a bit easier to tap */
+  .button {
+    width: 100%;
+  }
 }
