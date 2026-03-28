@@ -3,9 +3,10 @@ extends layout
 block content
   section.box
     h2 Dashboard
-    p This page can show user information after login.
+    p Welcome back, #{currentUser.name}.
+    p Your email: #{currentUser.email}
 
   section.box
     h2 Quick Info
-    p Total services: 0
+    p Total services: #{serviceCount}
     p Account type: User

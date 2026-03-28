@@ -11,13 +11,20 @@ html(lang="en")
       nav
         a(href="/") Home
         a(href="/services") Services
-        a(href="/add-service") Add Service
         .dropdown
-          button.dropdown-button(type="button") Account
+          if loggedIn
+            button.dropdown-button(type="button") #{currentUser.name}
+          else
+            button.dropdown-button(type="button") Account
           .dropdown-menu
-            a(href="/login") Log In
-            a(href="/register") Create Account
-            a(href="/dashboard") View Dashboard
+            if loggedIn
+              a(href="/dashboard") View Dashboard
+              a(href="/add-service") Add Service
+              form.logout-form(action="/logout", method="post")
+                button.logout-button(type="submit") Log Out
+            else
+              a(href="/login") Log In
+              a(href="/register") Create Account
 
     main
       block content

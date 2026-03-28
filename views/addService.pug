@@ -5,25 +5,28 @@ block content
     h2 Add Service
     p Use this form to add a service.
 
-    form(action="#", method="post")
+    if error
+      p.error-box= error
+
+    form(action="/add-service", method="post")
       .form-group
         label(for="serviceName") Service Name
-        input#serviceName(type="text", name="serviceName", placeholder="Enter service name")
+        input#serviceName(type="text", name="serviceName", placeholder="Enter service name", value=formData.serviceName, required)
 
       .form-group
         label(for="category") Category
         select#category(name="category")
           option(value="") Select category
-          option(value="design") Design
-          option(value="repair") Repair
-          option(value="marketing") Marketing
+          option(value="design", selected=formData.category === "design") Design
+          option(value="repair", selected=formData.category === "repair") Repair
+          option(value="marketing", selected=formData.category === "marketing") Marketing
 
       .form-group
         label(for="price") Price
-        input#price(type="number", name="price", placeholder="Enter price")
+        input#price(type="number", name="price", placeholder="Enter price", value=formData.price, required)
 
       .form-group
         label(for="description") Description
-        textarea#description(name="description", rows="4", placeholder="Enter description")
+        textarea#description(name="description", rows="4", placeholder="Enter description", required)= formData.description
 
       button.button(type="submit") Save Service

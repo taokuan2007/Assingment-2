@@ -7,18 +7,20 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background-color: #f4f4f4;
+  background-color: #eef2f5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  color: #22313f;
 }
 
 /* Top area of the page */
 header {
   background-color: #2c3e50;
   color: white;
-  padding: 20px;
+  padding: 22px 20px;
   text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Let the links move to the next line on small screens */
@@ -34,6 +36,12 @@ nav a {
   color: white;
   text-decoration: none;
   margin: 0 5px;
+  padding: 8px 10px;
+  border-radius: 4px;
+}
+
+nav a:hover {
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 /* This is the box that holds the account button and menu */
@@ -46,11 +54,12 @@ nav a {
 .dropdown-button {
   background-color: white;
   color: #2c3e50;
-  border: none;
+  border: 1px solid #d5dbe1;
   padding: 10px 14px;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: bold;
 }
 
 /* Hide the menu until the user moves over it */
@@ -62,10 +71,12 @@ nav a {
   min-width: 180px;
   background-color: white;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
   text-align: left;
   overflow: hidden;
   z-index: 10;
+  margin-top: 0;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 /* Show the menu when the mouse is on the dropdown */
@@ -87,21 +98,43 @@ nav a {
   background-color: #f1f1f1;
 }
 
+/* Keep the logout form neat inside the menu */
+.logout-form {
+  margin: 0;
+}
+
+/* Make the logout button look like the menu links */
+.logout-button {
+  width: 100%;
+  background-color: white;
+  color: #2c3e50;
+  border: none;
+  padding: 12px 15px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.logout-button:hover {
+  background-color: #f1f1f1;
+}
+
 /* Main content grows so the footer stays at the bottom */
 main {
   width: 80%;
   max-width: 900px;
-  margin: 20px auto;
+  margin: 30px auto;
   flex: 1;
 }
 
 /* White content boxes */
 .box {
   background-color: white;
-  border: 1px solid #ccc;
-  padding: 20px;
+  border: 1px solid #d8dee4;
+  padding: 22px;
   margin-bottom: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 /* Space between form fields */
@@ -113,6 +146,7 @@ label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  color: #2c3e50;
 }
 
 /* Form fields */
@@ -120,9 +154,18 @@ input,
 select,
 textarea {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #bbb;
-  border-radius: 4px;
+  padding: 11px;
+  border: 1px solid #c5ccd3;
+  border-radius: 6px;
+  background-color: #fcfcfc;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #2c3e50;
+  background-color: white;
 }
 
 /* Simple button style */
@@ -130,17 +173,43 @@ textarea {
   background-color: #2c3e50;
   color: white;
   border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
+  padding: 11px 16px;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: #1f2d3a;
+}
+
+/* Simple box for success or info text */
+.message-box {
+  background-color: #e8f4fd;
+  border: 1px solid #9dc7e8;
+  color: #234b68;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+/* Simple box for errors */
+.error-box {
+  background-color: #fdeaea;
+  border: 1px solid #e0a7a7;
+  color: #7a2222;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
 }
 
 /* Footer stays under the content */
 footer {
   text-align: center;
   padding: 15px;
-  background-color: #ddd;
+  background-color: #dfe5ea;
   margin-top: auto;
+  color: #384b5d;
 }
 
 /* Smaller screen changes */

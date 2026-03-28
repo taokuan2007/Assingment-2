@@ -5,21 +5,24 @@ block content
     h2 Register
     p Fill out the form below to create an account.
 
-    form(action="#", method="post")
+    if error
+      p.error-box= error
+
+    form(action="/register", method="post")
       .form-group
         label(for="name") Full Name
-        input#name(type="text", name="name", placeholder="Enter full name")
+        input#name(type="text", name="name", placeholder="Enter full name", value=formData.name, required)
 
       .form-group
         label(for="email") Email
-        input#email(type="email", name="email", placeholder="Enter email")
+        input#email(type="email", name="email", placeholder="Enter email", value=formData.email, required)
 
       .form-group
         label(for="password") Password
-        input#password(type="password", name="password", placeholder="Enter password")
+        input#password(type="password", name="password", placeholder="Enter password", required)
 
       .form-group
         label(for="confirmPassword") Confirm Password
-        input#confirmPassword(type="password", name="confirmPassword", placeholder="Confirm password")
+        input#confirmPassword(type="password", name="confirmPassword", placeholder="Confirm password", required)
 
       button.button(type="submit") Register

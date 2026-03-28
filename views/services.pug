@@ -3,31 +3,31 @@ extends layout
 block content
   section.box
     h2 Services
-    p Here are some sample services.
+    p Here are the services on the website.
 
     form(action="/services", method="get")
       .form-group
         label(for="search") Search
-        input#search(type="text", name="search", placeholder="Search service")
+        input#search(type="text", name="search", placeholder="Search service", value=filters.search)
 
       .form-group
         label(for="category") Category
         select#category(name="category")
-          option(value="") All
-          option(value="design") Design
-          option(value="repair") Repair
-          option(value="marketing") Marketing
+          option(value="", selected=filters.category === "") All
+          option(value="design", selected=filters.category === "design") Design
+          option(value="repair", selected=filters.category === "repair") Repair
+          option(value="marketing", selected=filters.category === "marketing") Marketing
 
       button.button(type="submit") Search
 
-  section.box
-    h3 Website Design
-    p Category: Design
+  if services.length === 0
+    section.box
+      h3 No Services Found
+      p Try a different search or category.
 
-  section.box
-    h3 Phone Repair
-    p Category: Repair
-
-  section.box
-    h3 Social Media Help
-    p Category: Marketing
+  each service in services
+    section.box
+      h3= service.name
+      p Category: #{service.category}
+      p Price: $#{service.price}
+      p Description: #{service.description}

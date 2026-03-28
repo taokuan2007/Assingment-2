@@ -5,13 +5,19 @@ block content
     h2 Login
     p Enter your information to log in.
 
-    form(action="#", method="post")
+    if message
+      p.message-box= message
+
+    if error
+      p.error-box= error
+
+    form(action="/login", method="post")
       .form-group
         label(for="email") Email
-        input#email(type="email", name="email", placeholder="Enter email")
+        input#email(type="email", name="email", placeholder="Enter email", value=formData.email, required)
 
       .form-group
         label(for="password") Password
-        input#password(type="password", name="password", placeholder="Enter password")
+        input#password(type="password", name="password", placeholder="Enter password", required)
 
       button.button(type="submit") Login
