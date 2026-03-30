@@ -2,18 +2,21 @@ extends layout
 
 block content
   section.box
-    h2 Home Page
-    p Welcome to BusinessConnect.
+    h1 Home Page
+    h2 Welcome to BusinessConnect.
     p BusinessConnect is a web application for managing business services and user accounts. It allows users to register, log in, and view or add services through a simple dashboard interface.
 
   section.box
     h2 Website's Pages
     ul
-      li
+      label
         a(href="/register") User registration
-      li
+      nav 
+      label
         a(href="/login") User login
-      li
+      nav
+      label
         a(href="/add-service") Add services
-      li
+      nav 
+      label
         a(href="/services") View services
