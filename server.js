@@ -37,7 +37,7 @@ const services = [
     {   id: 3,
         name: "Computer Repair",
         category: "Repair",
-        price: 150,
+        price: 100+ ,
         description: "Basic computer repair service",
         ownerId: 0
     },
