@@ -23,7 +23,7 @@ const services = [
         name: "Website Design",
         category: "Design",
         price: 500,
-        description: "Simple website design service",
+        description: "Simple website design service.",
         ownerId: 0
     },
     {
@@ -31,14 +31,14 @@ const services = [
         name: "Phone Repair",
         category: "Repair",
         price: 80,
-        description: "Basic phone repair service",
+        description: "Basic phone repair service.",
         ownerId: 0
     },
     {   id: 3,
         name: "Computer Repair",
         category: "Repair",
         price: 100,
-        description: "Basic computer repair service",
+        description: "Basic computer repair service. Prices may vary based on the issue.",
         ownerId: 0
     },
     {
@@ -46,7 +46,7 @@ const services = [
         name: "Social Media Help",
         category: "Marketing",
         price: 200,
-        description: "Help with social media pages",
+        description: "Help with social media pages.",
         ownerId: 0
     }
 ];
