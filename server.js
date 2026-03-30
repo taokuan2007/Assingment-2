@@ -34,8 +34,15 @@ const services = [
         description: "Basic phone repair service",
         ownerId: 0
     },
+    {   id: 3,
+        name: "Computer Repair",
+        category: "Repair",
+        price: 150,
+        description: "Basic computer repair service",
+        ownerId: 0
+    },
     {
-        id: 3,
+        id: 4,
         name: "Social Media Help",
         category: "Marketing",
         price: 200,
