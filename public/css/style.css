@@ -7,7 +7,7 @@
 body {
   font-family: 'Tahoma', sans-serif;
   margin: 0;
-  background-color: #eef2f5;
+  background-color: rgba(232, 238, 245, 1);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,16 +16,15 @@ body {
 
 /* Top area of the page */
 header {
-  background-color: #1e2b38;
+  background-color: rgba(24, 44, 72, 0.96);
   color: white;
-  padding: 12px 20px;
+  padding: 8px 20px;
   text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 18px rgba(10, 25, 45, 0.28);
 }
 
 /* Let the links move to the next line on small screens */
 nav {
-  margin-top: 10px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -35,9 +34,9 @@ nav {
 nav a {
   color: white;
   text-decoration: none;
-  margin: 0 5px;
+  margin: 0;
   padding: 8px 10px;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 nav a:hover {
@@ -76,7 +75,7 @@ nav a:hover {
   overflow: hidden;
   z-index: 10;
   margin-top: 0;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 16px rgb(0, 0, 0,);
 }
 
 /* Show the menu when the mouse is on the dropdown */
@@ -87,7 +86,7 @@ nav a:hover {
 /* Style the links inside the dropdown menu */
 .dropdown-menu a {
   display: block;
-  color: #2c3e50;
+  color: rgba(0, 0, 0, 0.99);
   padding: 12px 15px;
   text-decoration: none;
   margin: 0;
@@ -107,7 +106,7 @@ nav a:hover {
 .logout-button {
   width: 100%;
   background-color: white;
-  color: #2c3e50;
+  color: rgba(24, 44, 72, 0.96);
   border: none;
   padding: 12px 15px;
   text-align: left;
@@ -146,7 +145,7 @@ label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #2c3e50;
+  color: rgba(18, 36, 60, 0.96);
 }
 
 /* Form fields */
@@ -170,7 +169,7 @@ textarea:focus {
 
 /* Simple button style */
 .button {
-  background-color: #2c3e50;
+  background-color: rgba(24, 44, 72, 0.96);
   color: white;
   border: none;
   padding: 11px 16px;
@@ -207,9 +206,9 @@ textarea:focus {
 footer {
   text-align: center;
   padding: 15px;
-  background-color: #dfe5ea;
+  background-color: rgba(24, 44, 72, 0.96);
   margin-top: auto;
-  color: #384b5d;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 /* Smaller screen changes */
