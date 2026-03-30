@@ -21,7 +21,7 @@ const services = [
     {
         id: 1,
         name: "Website Design",
-        category: "design",
+        category: "Design",
         price: 500,
         description: "Simple website design service",
         ownerId: 0
@@ -29,7 +29,7 @@ const services = [
     {
         id: 2,
         name: "Phone Repair",
-        category: "repair",
+        category: "Repair",
         price: 80,
         description: "Basic phone repair service",
         ownerId: 0
@@ -37,7 +37,7 @@ const services = [
     {
         id: 3,
         name: "Social Media Help",
-        category: "marketing",
+        category: "Marketing",
         price: 200,
         description: "Help with social media pages",
         ownerId: 0
