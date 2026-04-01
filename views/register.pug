@@ -1,28 +1,68 @@
+//- This file extends the main layout template (layout.pug)
 extends layout
 
+//- Fill the "content" block defined in the layout
 block content
+
+  //- Main section container for the registration form
   section.box
+    //- Heading for the registration page
     h2 Register
+
+    //- Short instruction for the user
     p Fill out the form below to create an account.
 
+    //- Conditional rendering for errors (e.g., validation issues)
     if error
       p.error-box= error
 
+    //- Registration form, sending a POST request to "/register"
     form(action="/register", method="post")
+
+      //- Form group for full name input
       .form-group
         label(for="name") Full Name
-        input#name(type="text", name="name", placeholder="Enter full name", value=formData.name, required)
+        //- Text input for user's full name
+        //- value=formData.name preserves previous input in case of errors
+        input#name(
+          type="text",
+          name="name",
+          placeholder="Enter full name",
+          value=formData.name,
+          required
+        )
 
+      //- Form group for email input
       .form-group
         label(for="email") Email
-        input#email(type="email", name="email", placeholder="Enter email", value=formData.email, required)
+        input#email(
+          type="email",
+          name="email",
+          placeholder="Enter email",
+          value=formData.email,
+          required
+        )
 
+      //- Form group for password input
       .form-group
         label(for="password") Password
-        input#password(type="password", name="password", placeholder="Enter password", required)
+        //- Password input (value not preserved for security)
+        input#password(
+          type="password",
+          name="password",
+          placeholder="Enter password",
+          required
+        )
 
+      //- Form group for confirming password
       .form-group
         label(for="confirmPassword") Confirm Password
-        input#confirmPassword(type="password", name="confirmPassword", placeholder="Confirm password", required)
+        input#confirmPassword(
+          type="password",
+          name="confirmPassword",
+          placeholder="Confirm password",
+          required
+        )
 
+      //- Submit button for the form
       button.button(type="submit") Register

@@ -1,14 +1,28 @@
+//- This file extends the base layout template (layout.pug)
 extends layout
 
+//- Fill in the "content" block defined in the layout
 block content
-  section.box
-    h1 Home Page
-    h2 Welcome to BusinessConnect.
-    p BusinessConnect is a web application for managing business services and user accounts. It allows users to register, log in, and view or add services through a simple dashboard interface.
 
+  //- First section: Home Page introduction
+  section.box
+    //- Main heading for the home page
+    h1 Home Page
+
+    //- Subheading welcome message
+    h2 Welcome to BusinessConnect.
+
+    //- Paragraph describing what the web application does
+    p BusinessConnect is a web application for managing business services and user accounts. 
+      | It allows users to register, log in, and view or add services through a simple dashboard interface.
+
+  //- Second section: Links to different pages of the website
   section.box
     h2 Website's Pages
+
+    //- Unordered list of page links
     ul
+      //- Each label contains a link to a page
       label
         a(href="/register") User registration
       nav 

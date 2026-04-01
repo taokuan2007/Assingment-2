@@ -1,12 +1,27 @@
+//- This file extends a base layout template (layout.pug)
 extends layout
 
+//- Fills the "content" block defined in the layout
 block content
+
+  //- First section: User Dashboard
   section.box
+    //- Heading for the dashboard section
     h2 Dashboard
+
+    //- Greeting the user dynamically using their name
     p Welcome back, #{currentUser.name}.
+
+    //- Displaying the user's email
     p Your email: #{currentUser.email}
 
+  //- Second section: Quick Info
   section.box
+    //- Heading for quick info section
     h2 Quick Info
+
+    //- Display total number of services dynamically
     p Total services: #{serviceCount}
+
+    //- Display account type (static text in this case)
     p Account type: User

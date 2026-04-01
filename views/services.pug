@@ -1,33 +1,57 @@
+//- This file extends the main layout template (layout.pug)
 extends layout
 
+//- Fill the "content" block defined in the layout
 block content
+
+  //- Section for displaying services heading and search/filter form
   section.box
+    //- Main heading
     h1 Services
+
+    //- Subheading description
     h2 Here are the services on the website.
 
+    //- Form for searching and filtering services (GET request)
     form(action="/services", method="get")
+
+      //- Search input field
       .form-group
         label(for="search") Search
-        input#search(type="text", name="search", placeholder="Search service", value=filters.search)
+        //- value=filters.search preserves user's previous search term
+        input#search(
+          type="text",
+          name="search",
+          placeholder="Search service",
+          value=filters.search
+        )
 
+      //- Category filter dropdown
       .form-group
         label(for="category") Category
         select#category(name="category")
+          //- "All" option selected if no category filter is applied
           option(value="", selected=filters.category === "") All
           option(value="design", selected=filters.category === "design") Design
           option(value="repair", selected=filters.category === "repair") Repair
           option(value="marketing", selected=filters.category === "marketing") Marketing
 
+      //- Submit button to apply search/filter
       button.button(type="submit") Search
 
+  //- Conditional rendering if no services are found
   if services.length === 0
     section.box
       h3 No Services Found
       p Try a different search or category.
 
+  //- Loop through the array of services and display each one
   each service in services
     section.box
+      //- Service name
       h3= service.name
+
+      //- Service details
       p Category: #{service.category}
       p Price: $#{service.price}
       p Description: #{service.description}

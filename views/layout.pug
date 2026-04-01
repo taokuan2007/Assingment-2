@@ -1,33 +1,64 @@
+//- This is the main layout template that other pages extend
+
+//- Document type and language
 doctype html
 html(lang="en")
+  
+  //- HEAD section: meta info, title, and styles
   head
+    //- Character encoding
     meta(charset="UTF-8")
+
+    //- Responsive viewport for mobile devices
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+    //- Page title, dynamically injected via `title` variable
     title #{title} | BusinessConnect
+
+    //- Link to external CSS file
     link(rel="stylesheet", href="/css/style.css")
+
+  //- BODY section: visible content
   body
+
+    //- HEADER: site header and navigation
     header
+      //- Main site title/logo
       h1 BusinessConnect
+
+      //- Navigation bar
       nav
+        //- Static links
         a(href="/") Home
         a(href="/services") Services
+
+        //- Dropdown menu for account actions
         .dropdown
+          //- Button text changes depending on login status
           if loggedIn
             button.dropdown-button(type="button") #{currentUser.name}
           else
             button.dropdown-button(type="button") Account
+
+          //- Dropdown menu contents
           .dropdown-menu
             if loggedIn
+              //- Links available for logged-in users
               a(href="/dashboard") View Dashboard
               a(href="/add-service") Add Service
+
+              //- Logout form
               form.logout-form(action="/logout", method="post")
                 button.logout-button(type="submit") Log Out
             else
+              //- Links available for guests (not logged in)
               a(href="/login") Log In
               a(href="/register") Create Account
 
+    //- MAIN content area where child pages inject their content
     main
       block content
 
+    //- FOOTER section
     footer
       p © Members of group 19 ·  CST8326 Assignment 2

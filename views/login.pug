@@ -1,23 +1,53 @@
+//- This file extends the base layout template (layout.pug)
 extends layout
 
+//- Fill the "content" block defined in the layout
 block content
+
+  //- Main section container for the login form
   section.box
+    //- Heading for the login page
     h2 Login
+
+    //- Short instructions for the user
     p Enter your information to log in.
 
+    //- Conditional rendering for messages
+    //- If a general message exists (e.g., "Logged out successfully"), display it
     if message
       p.message-box= message
 
+    //- Conditional rendering for errors
+    //- If an error exists (e.g., "Invalid email/password"), display it
     if error
       p.error-box= error
 
+    //- Login form sending a POST request to "/login"
     form(action="/login", method="post")
+
+      //- Form group for email input
       .form-group
         label(for="email") Email
-        input#email(type="email", name="email", placeholder="Enter email", value=formData.email, required)
+        //- Email input field
+        //- value=formData.email preserves previously entered value
+        input#email(
+          type="email",
+          name="email",
+          placeholder="Enter email",
+          value=formData.email,
+          required
+        )
 
+      //- Form group for password input
       .form-group
         label(for="password") Password
-        input#password(type="password", name="password", placeholder="Enter password", required)
+        //- Password input field (value not preserved for security)
+        input#password(
+          type="password",
+          name="password",
+          placeholder="Enter password",
+          required
+        )
 
+      //- Submit button for the form
       button.button(type="submit") Login

@@ -1,32 +1,84 @@
+//- This file extends a base layout template (layout.pug)
+//- It means this file will fill in blocks defined in that layout
 extends layout
 
+//- This defines the "content" block that the layout expects
 block content
+
+  //- Main section container for styling/layout
   section.box
+
+    //- Page heading
     h2 Add Service
+
+    //- Short description/instructions for the user
     p Use this form to add a service.
 
+    //- Conditional rendering:
+    //- If an "error" variable exists, display it inside a styled paragraph
     if error
       p.error-box= error
 
+    //- Form that sends a POST request to "/add-service"
     form(action="/add-service", method="post")
-      .form-group
-        label(for="serviceName") Service Name
-        input#serviceName(type="text", name="serviceName", placeholder="Enter service name", value=formData.serviceName, required)
 
+      //- Form group for Service Name input
+      .form-group
+        //- Label linked to the input via "for" and id
+        label(for="serviceName") Service Name
+
+        //- Text input field
+        //- value=formData.serviceName keeps previously entered data (useful after validation errors)
+        input#serviceName(
+          type="text",
+          name="serviceName",
+          placeholder="Enter service name",
+          value=formData.serviceName,
+          required
+        )
+
+      //- Form group for Category dropdown
       .form-group
         label(for="category") Category
+
+        //- Dropdown select field
         select#category(name="category")
+
+          //- Default empty option
           option(value="") Select category
+
+          //- Each option checks if it should be selected
+          //- selected=... will mark it selected if the condition is true
           option(value="design", selected=formData.category === "design") Design
           option(value="repair", selected=formData.category === "repair") Repair
           option(value="marketing", selected=formData.category === "marketing") Marketing
 
+      //- Form group for Price input
       .form-group
         label(for="price") Price
-        input#price(type="number", name="price", placeholder="Enter price", value=formData.price, required)
 
+        //- Number input ensures only numeric values
+        //- value keeps previously entered data
+        input#price(
+          type="number",
+          name="price",
+          placeholder="Enter price",
+          value=formData.price,
+          required
+        )
+
+      //- Form group for Description textarea
       .form-group
         label(for="description") Description
-        textarea#description(name="description", rows="4", placeholder="Enter description", required)= formData.description
 
+        //- Textarea for longer text input
+        //- Content is filled using "=" to inject dynamic value
+        textarea#description(
+          name="description",
+          rows="4",
+          placeholder="Enter description",
+          required
+        )= formData.description
+
+      //- Submit button to send the form
       button.button(type="submit") Save Service
