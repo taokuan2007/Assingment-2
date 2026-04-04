@@ -1,30 +1,31 @@
-const express = require("express");
+const express = require("express"); // loads the express libary
 
 // create the express app
-const app = express();
+const app = express(); // used to define app.*** routes, settings and middleware
 
 // choose the port number
-const port = 3000;
+const port = 3000; //local port
 
 // use pug for the pages
-app.set("view engine", "pug");
+app.set("view engine", "pug");  //usses pug instead of HTML
 
 // use the public folder and read form data
-app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public")); //CSS/files in public, the browser can access them
+app.use(express.urlencoded({ extended: true })); // without this line, things like req.body.email would not work
 
 // simple arrays for users and services
-const users = [];
+const users = []; //this app stores users only in memory, not in a database. Restart the server and they're gone
 
 // sample services to show on the page at the start
 const services = [
     {
-        id: 1,
-        name: "Website Design",
-        category: "Design",
-        price: 500,
-        description: "Simple website design service.",
-        ownerId: 0
+        id: 1, //unique number
+        name: "Website Design", //service name
+        category: "Design", //type of service
+        price: 500, //cost
+        description: "Simple website design service.", //details
+        ownerId: 0 // who owns it
+        //same concept for other services
     },
     {
         id: 2,
@@ -52,64 +53,67 @@ const services = [
 ];
 
 // this stores who is logged in
-let currentUser = null;
+let currentUser = null; //this app tracks login using one variable
 
 // make login info available in all pug pages
-app.use((req, res, next) => {
+app.use((req, res, next) => { //req = request, res = response, next = function to continue to the next middleware/route
     // save the logged in user for the views
-    res.locals.currentUser = currentUser;
+    res.locals.currentUser = currentUser; //in Pug, you can show the logged-in user’s name
 
     // true if someone is logged in, false if not
-    res.locals.loggedIn = currentUser ? true : false;
+    res.locals.loggedIn = currentUser ? true : false; //if currentUser exists, loggedIn = true, otherwise, loggedIn = false
 
     // move to the next step
     next();
 });
 
 // use this for pages that need login
-function requireLogin(req, res, next) {
+function requireLogin(req, res, next) { //creates a function named requireLogin
     // if nobody is logged in, send the user to the login page
-    if (!currentUser) {
-        return res.redirect("/login?message=Please log in first");
+    if (!currentUser) { //checks if there is no current user
+        return res.redirect("/login?message=Please log in first"); //if the user is not logged in, they are sent to /login
     }
 
     // if logged in, continue
-    next();
+    next(); 
 }
 
+//ROUTES
+
 // home page
-app.get("/", (req, res) => {
+app.get("/", (req, res) => { //app.get() handles GET requests. "/" means the home page
     // load the home page
-    res.render("index", { title: "Home" });
+    res.render("index", { title: "Home" }); //renders pug, points to index.pug
 });
 
 // show login page
 app.get("/login", (req, res) => {
-    // if already logged in, go to dashboard
+    // if someone is already logged in, they do not need the login page, so send them to the dashboard
     if (currentUser) {
-        return res.redirect("/dashboard");
+        return res.redirect("/dashboard"); 
     }
 
     // show the login page with empty values
-    res.render("login", {
-        title: "Login",
-        message: req.query.message || "",
-        error: "",
-        formData: { email: "" }
+    res.render("login", { 
+        title: "Login", //Sets the page tittle
+        message: req.query.message || "", //reads message from URL query string, if no message exists, use an empty string
+        error: "", //means no error yet
+        formData: { email: "" } //empty email field
     });
 });
 
 // check login form
-app.post("/login", (req, res) => {
-    // get login form values
+app.post("/login", (req, res) => { //handles form submissions to /login
+    // get the submitted values from the form
     const email = req.body.email;
     const password = req.body.password;
 
     // this will store the user if found
-    let foundUser = null;
+    let foundUser = null; 
 
     // check every user to see if the email and password match
-    for (let i = 0; i < users.length; i++) {
+    for (let i = 0; i < users.length; i++) { //oop through every user in the users array
+        //check whether: email matches and password matches = If both match, save that user in foundUser
         if (users[i].email === email && users[i].password === password) {
             foundUser = users[i];
         }
@@ -121,11 +125,11 @@ app.post("/login", (req, res) => {
             title: "Login",
             message: "",
             error: "Please fill in all fields.",
-            formData: { email: email || "" }
+            formData: { email: email || "" } //email is preserved so user does not need to type it again
         });
     }
 
-    // show an error if no matching user was found
+    //if no matching user was found: Show the login page again with an error message
     if (!foundUser) {
         return res.render("login", {
             title: "Login",
@@ -138,13 +142,13 @@ app.post("/login", (req, res) => {
     // save the user as logged in
     currentUser = foundUser;
 
-    // go to the dashboard
+    // send them to the dashboard
     res.redirect("/dashboard");
 });
 
 // show register page
 app.get("/register", (req, res) => {
-    // if already logged in, go to dashboard
+    // if already logged in, skip registration page, go to dashboard
     if (currentUser) {
         return res.redirect("/dashboard");
     }
@@ -161,7 +165,7 @@ app.get("/register", (req, res) => {
 });
 
 // save a new user
-app.post("/register", (req, res) => {
+app.post("/register", (req, res) => { //handles submitted register form
     // get register form values
     const name = req.body.name;
     const email = req.body.email;
@@ -174,7 +178,7 @@ app.post("/register", (req, res) => {
     // go through the users and compare emails
     for (let i = 0; i < users.length; i++) {
         if (users[i].email === email) {
-            emailExists = true;
+            emailExists = true; //if yes, set to true
         }
     }
 
@@ -191,7 +195,7 @@ app.post("/register", (req, res) => {
     if (password !== confirmPassword) {
         return res.render("register", {
             title: "Register",
-            error: "Passwords do not match.",
+            error: "Passwords do not match.", // show error if they do not match
             formData: { name, email }
         });
     }
@@ -200,15 +204,15 @@ app.post("/register", (req, res) => {
     if (emailExists) {
         return res.render("register", {
             title: "Register",
-            error: "Email already exists.",
+            error: "Email already exists.", //if yes, show error
             formData: { name, email }
         });
     }
 
     // create the new user object
     const newUser = {
-        id: users.length + 1,
-        name,
+        id: users.length + 1, //gives a simple new ID
+        name, //short for name: name ; same for others
         email,
         password
     };
@@ -224,35 +228,35 @@ app.post("/register", (req, res) => {
 });
 
 // logout
-app.post("/logout", (req, res) => {
+app.post("/logout", (req, res) => { //handles logout form submission
     // remove the logged in user
     currentUser = null;
 
-    // send the user back to login
+    // send the user back to login with a message
     res.redirect("/login?message=You have been logged out");
 });
 
 // private dashboard page
-app.get("/dashboard", requireLogin, (req, res) => {
+app.get("/dashboard", requireLogin, (req, res) => { //that means user must be logged in first
     // this stores how many services the user has
-    let total = 0;
+    let total = 0; //starts the counter
 
     // count how many services belong to the user
-    for (let i = 0; i < services.length; i++) {
+    for (let i = 0; i < services.length; i++) { //loops through all
         if (services[i].ownerId === currentUser.id) {
-            total = total + 1;
+            total = total + 1; //if a service belongs to the logged-in user, add 1 to total
         }
     }
 
     // show the dashboard page
     res.render("dashboard", {
         title: "Dashboard",
-        serviceCount: total
+        serviceCount: total //how many services this user owns
     });
 });
 
 // show add service page
-app.get("/add-service", requireLogin, (req, res) => {
+app.get("/add-service", requireLogin, (req, res) => { //only logged-in users can access this page
     // show the form with empty values
     res.render("addService", {
         title: "Add Service",
@@ -267,15 +271,16 @@ app.get("/add-service", requireLogin, (req, res) => {
 });
 
 // save a new service
-app.post("/add-service", requireLogin, (req, res) => {
-    // get form values
+app.post("/add-service", requireLogin, (req, res) => { //only logged-in users can submit this route
+    // get submitted form values
     const serviceName = req.body.serviceName;
     const category = req.body.category;
     const price = req.body.price;
     const description = req.body.description;
 
     // make sure all fields are filled in
-    if (!serviceName || !category || !price || !description) {
+    if (!serviceName || !category || !price || !description) { //check if any field is missing
+        //if missing, show form again with error and keep entered values
         return res.render("addService", {
             title: "Add Service",
             error: "Please fill in all fields.",
@@ -298,18 +303,19 @@ app.post("/add-service", requireLogin, (req, res) => {
         ownerId: currentUser.id
     };
 
-    // save the new service
+    // add the new service to the services array
     services.push(newService);
 
-    // go to the services page
+    // go to the services page after adding
     res.redirect("/services");
 });
 
 // show all services
-app.get("/services", (req, res) => {
-    // get search and category from the page
-    const search = req.query.search || "";
-    const category = req.query.category || "";
+app.get("/services", (req, res) => { //his route is public. Anyone can view services
+    // get search and category from the page ; read filter values from the URL.
+    const search = req.query.search || ""; // E.g. /services?search=repair
+    const category = req.query.category || ""; //E.g. /services?category=Repair
+    //if missing, use empty string
 
     // new array for the matching services
     const filteredServices = [];
@@ -321,19 +327,19 @@ app.get("/services", (req, res) => {
         let matchesCategory = true;
 
         // check the search word
-        if (search) {
-            const lowerSearch = search.toLowerCase();
-            matchesSearch =
-                service.name.toLowerCase().includes(lowerSearch) ||
+        if (search) { //only do search filtering if user entered a search term
+            const lowerSearch = search.toLowerCase(); //so comparison is case-insensitive
+            matchesSearch = //this checks whether the search text appears in either: service name, service description
+                service.name.toLowerCase().includes(lowerSearch) || //.includes() returns true if text exists inside the string
                 service.description.toLowerCase().includes(lowerSearch);
         }
 
-        // check the category
+        // check the category, if category was chosen, only match services whose category is exactly the same.
         if (category) {
             matchesCategory = service.category === category;
         }
 
-        // add the service if it matches both checks
+        // only add the service if both conditions are true
         if (matchesSearch && matchesCategory) {
             filteredServices.push(service);
         }
@@ -341,6 +347,7 @@ app.get("/services", (req, res) => {
 
     // show the services page
     res.render("services", {
+        //sends
         title: "Services",
         services: filteredServices,
         filters: {
@@ -351,6 +358,6 @@ app.get("/services", (req, res) => {
 });
 
 // start server
-app.listen(port, () => {
-    console.log("Server running on port 3000");
+app.listen(port, () => { //this starts the server and tells it to listen on the chosen port
+    console.log("Server running on port 3000"); // prints message in the console
 });
